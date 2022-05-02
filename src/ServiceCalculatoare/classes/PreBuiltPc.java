@@ -5,9 +5,7 @@ public class PreBuiltPc extends Item{
     Motherboard motherboard;
     RamMemory ramMemory;
 
-    public Processor getCpu() {
-        return cpu;
-    }
+    public Processor getCpu() {return cpu;}
 
     public void setCpu(Processor cpu) {
         this.cpu = cpu;
