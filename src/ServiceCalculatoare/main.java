@@ -18,7 +18,7 @@ public class main {
             System.out.println("What item would you like to add to the store?");
             System.out.println("Stop = 0\ngenerateNewComponentAndAddToStore = 1\nshowAllElementsInStoreByType = 2\ngetAllElementsByTypeInStore = 3\n" +
                     "getAllComponentsOfAType = 4\nshowAllElementsInStore = 5\ngetRandomPcPart = 6\ncreateNewFinalProduct = 7\n" +
-                    "getBestThreeItemsOfASpecifiedType = 8\nshowAllItemsWithTheSameManufacturer = 9\n");
+                    "getBestThreeItemsOfASpecifiedType = 8\nshowAllItemsWithTheSameManufacturer = 9\ngetBestThreeItemsOfASpecifiedType = 10\n");
             System.out.print("Obiectul dorit: ");
 
             Scanner scanner = new Scanner(System.in);
@@ -63,9 +63,18 @@ public class main {
                         System.out.println(item);
                     }
                     break;
-                case 9:System.out.print("Introduceti producatorul dorit: ");
+                case 9:
+                    System.out.print("Introduceti producatorul dorit: ");
                     String type3 = scanner.nextLine();
                     service.showAllItemsWithTheSameManufacturer(type3);
+                    break;
+                case 10:
+                    System.out.print("Introduceti tipul obiectului dorit: ");
+                    String type4 = scanner.nextLine();
+                    List<Item> listT4 = service.getBestThreeItemsOfASpecifiedType(type4);
+                    for(Item item : listT4){
+                        System.out.println(item);
+                    }
                     break;
             }
         }

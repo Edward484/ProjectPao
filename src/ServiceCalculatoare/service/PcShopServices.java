@@ -172,5 +172,18 @@ public class PcShopServices {
         }
     }
 
+    public List<Item> getBestThreeItemsOfASpecifiedType(String type){
+        try {
+            ArrayList<Item> arrayList = getAllComponentsOfAType(type);
+            Collections.sort(arrayList);
+            Collections.reverse(arrayList);
+            return arrayList.subList(0,3);
+        }
+        catch (Exception e){
+            System.out.println(e.toString());
+        }
+
+        return null;
+    }
 
 }
