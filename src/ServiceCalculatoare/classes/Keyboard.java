@@ -1,6 +1,6 @@
 package ServiceCalculatoare.classes;
 
-public class Keyboard extends PeripheralPcPart {
+public class Keyboard extends PeripheralPcPart implements Comparable<Item> {
     String layout;
     Boolean isMechanical;
 
@@ -41,5 +41,11 @@ public class Keyboard extends PeripheralPcPart {
                 ", isMechanical=" + isMechanical +
                 ", connectionInterface='" + connectionInterface + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Item u) {
+        Keyboard o = (Keyboard) u;
+        return isMechanical.compareTo(o.isMechanical);
     }
 }

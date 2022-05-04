@@ -1,6 +1,7 @@
 package ServiceCalculatoare.classes;
 
-public class Item {
+
+public abstract class Item implements Comparable<Item>  {
     protected Integer id;
     protected String modelName;
     protected String manufacturer;
@@ -16,7 +17,6 @@ public class Item {
         this.modelName = modelName;
         this.manufacturer = manufacturer;
     }
-
 
     public Integer getId() {
         return id;
@@ -42,12 +42,6 @@ public class Item {
         this.manufacturer = manufacturer;
     }
 
-    @Override
-    public String toString() {
-        return "Item{" +
-                "id=" + id +
-                ", modelName='" + modelName + '\'' +
-                ", manufacturer='" + manufacturer + '\'' +
-                '}';
-    }
+
+
 }

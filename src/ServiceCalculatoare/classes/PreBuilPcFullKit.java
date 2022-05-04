@@ -1,6 +1,6 @@
 package ServiceCalculatoare.classes;
 
-public class PreBuilPcFullKit extends Item implements Monitor, MouseAndKeyboardCombo{
+public class PreBuilPcFullKit extends Item implements Monitor, MouseAndKeyboardCombo, Comparable<Item>{
     Processor cpu;
     Motherboard motherboard;
     RamMemory ramMemory;
@@ -8,6 +8,19 @@ public class PreBuilPcFullKit extends Item implements Monitor, MouseAndKeyboardC
     Integer displaySize;
     Mouse mouse;
     Keyboard keyboard;
+
+    public PreBuilPcFullKit(Integer id, String modelName, String manufacturer,
+                            Processor cpu, Motherboard motherboard, RamMemory ramMemory,
+                            Integer refreshRate, Integer displaySize, Mouse mouse, Keyboard keyboard) {
+        super(id, modelName, manufacturer);
+        this.cpu = cpu;
+        this.motherboard = motherboard;
+        this.ramMemory = ramMemory;
+        this.refreshRate = refreshRate;
+        this.displaySize = displaySize;
+        this.mouse = mouse;
+        this.keyboard = keyboard;
+    }
 
     @Override
     public Integer GetRefreshRate() {
@@ -77,4 +90,28 @@ public class PreBuilPcFullKit extends Item implements Monitor, MouseAndKeyboardC
         this.keyboard = keyboard;
     }
 
+    @Override
+    public String toString() {
+        return "PreBuilPcFullKit{" +
+                "id=" + id +
+                ", modelName='" + modelName + '\'' +
+                ", manufacturer='" + manufacturer + '\'' +
+                ", cpu=" + cpu.getId() +
+                ", motherboard=" + motherboard.getId() +
+                ", ramMemory=" + ramMemory.getId() +
+                ", refreshRate=" + refreshRate +
+                ", displaySize=" + displaySize +
+                ", mouse=" + mouse.getId() +
+                ", keyboard=" + keyboard.getId() +
+                '}';
+    }
+
+    @Override
+    public int compareTo(Item u) {
+        PreBuilPcFullKit o = (PreBuilPcFullKit) u;
+        int r = cpu.compareTo(o.cpu);
+        if(r == 0)
+            return ramMemory.compareTo(o.ramMemory);
+        return r;
+    }
 }

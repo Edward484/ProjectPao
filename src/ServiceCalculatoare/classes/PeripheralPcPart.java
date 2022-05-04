@@ -1,6 +1,6 @@
 package ServiceCalculatoare.classes;
 
-public class PeripheralPcPart extends Item{
+public abstract class PeripheralPcPart extends Item{
     protected String connectionInterface;
 
     public PeripheralPcPart() {

@@ -1,11 +1,27 @@
 package ServiceCalculatoare.classes;
 
-public class Motherboard extends InternalPcPart{
+public class Motherboard extends InternalPcPart implements Comparable<Item>{
     String socket;
     String memoryType;
     String format;
     Integer numberOfSata;
     String chipsetName;
+
+    public Motherboard(Integer id, String modelName, String manufacturer, Integer powerDrown) {
+        super(id, modelName, manufacturer, powerDrown);
+    }
+
+
+    public Motherboard(Integer id, String modelName, String manufacturer, Integer powerDrown,
+                       String socket, String memoryType, String format, Integer numberOfSata,
+                       String chipsetName) {
+        super(id, modelName, manufacturer, powerDrown);
+        this.socket = socket;
+        this.memoryType = memoryType;
+        this.format = format;
+        this.numberOfSata = numberOfSata;
+        this.chipsetName = chipsetName;
+    }
 
     public String getMemoryType() {
         return memoryType;
@@ -45,5 +61,28 @@ public class Motherboard extends InternalPcPart{
 
     public void setSocket(String socket) {
         this.socket = socket;
+    }
+
+    @Override
+    public String toString() {
+        return "Motherboard{" +
+                "id=" + id +
+                ",powerDrown=" + powerDrown +
+                ", modelName='" + modelName + '\'' +
+                ", manufacturer='" + manufacturer + '\'' +
+                ", socket='" + socket + '\'' +
+                ", memoryType='" + memoryType + '\'' +
+                ", format='" + format + '\'' +
+                ", numberOfSata=" + numberOfSata +
+                ", chipsetName='" + chipsetName + '\'' +
+                '}';
+    }
+
+
+    @Override
+    public int compareTo(Item u) {
+        Motherboard o = (Motherboard) u;
+        return numberOfSata.compareTo(o.numberOfSata);
+
     }
 }
