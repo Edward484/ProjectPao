@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 public class PcShopServices {
     Store store = new Store();
     Generator g = new Generator();
+    LogService logService = new LogService();
 
 
     public void generateNewComponentAndAddToStore() {
@@ -26,27 +27,33 @@ public class PcShopServices {
                 case 7:
                     store.addStoreItem(new Keyboard(g.generateId(), g.generateModelName(), g.generateManufacturer(), g.generateConnectionInterface(),
                             g.generateLayout(), g.generateBool()));
+                    logService.createNewLog("Created new keyboard");
                     break;
                 case 8:
                     store.addStoreItem(new GamingMonitor(g.generateId(), g.generateModelName(), g.generateManufacturer(), g.generateConnectionInterface(),
-                            g.generateRefreshRate(), g.generatEdiagonalList()));
+                            g.generateRefreshRate(), g.generateDiagonalList()));
+                    logService.createNewLog("Created new GamingMonitor");
                     break;
                 case 9:
                     store.addStoreItem(new Mouse(g.generateId(), g.generateModelName(), g.generateManufacturer(), g.generateConnectionInterface(),
                             g.generateNumberOfButtons(), g.generateDpi()));
+                    logService.createNewLog("Created new Mouse");
                     break;
                 case 10:
                     store.addStoreItem(new Motherboard(g.generateId(), g.generateModelName(), g.generateManufacturer(), g.generatePowerDrown(),
                             g.generateSocket(), g.generateMemoryType(), g.generateFormat(), g.generateNumberOfSata(), g.generateChipsetName()));
+                    logService.createNewLog("Created new Motherboard");
                     break;
                 case 11:
                     Integer numOfCores = g.generateNumberOfCores();
                     store.addStoreItem(new Processor(g.generateId(), g.generateModelName(), g.generateManufacturer(), g.generatePowerDrown(),
                             g.generateSocket(), g.generateManufacturingProcess(), numOfCores, numOfCores * 2, g.generateFrequency()));
+                    logService.createNewLog("Created new Processor");
                     break;
                 case 12:
                     store.addStoreItem(new RamMemory(g.generateId(), g.generateModelName(), g.generateManufacturer(), g.generatePowerDrown(),
                             g.generateSize(), g.generateMemoryType(), g.generateFrequency()));
+                    logService.createNewLog("Created new RamMemory");
                     break;
 
             }
@@ -57,6 +64,8 @@ public class PcShopServices {
         for (Item item : store.getStoreItems()) {
                 System.out.println(item);
         }
+
+        logService.createNewLog("Displayed all items");
     }
 
     public Map<String, ArrayList<Item>> getAllElementsByTypeInStore() {
@@ -64,6 +73,7 @@ public class PcShopServices {
         for (Item item : store.getStoreItems()) {
             store.addStoreItemToMap(item);
         }
+        logService.createNewLog("Requested all items");
         return store.getStoreItemsMapped();
     }
 
@@ -79,6 +89,7 @@ public class PcShopServices {
         catch (Exception e){
             System.out.println(e.toString());
         }
+        logService.createNewLog("Requested all items of type" + type);
         return null;
     }
 
@@ -106,6 +117,8 @@ public class PcShopServices {
         catch (Exception e){
             System.out.println(e.toString());
         }
+
+        logService.createNewLog("Requested a random pc part");
         return null;
     }
 
@@ -125,19 +138,22 @@ public class PcShopServices {
                     store.addStoreItem(new PreBuiltPc(g.generateId(), g.generateModelName(), g.generateManufacturer()
                             ,(Processor) getRandomPcPart("Processor"), (Motherboard) getRandomPcPart("Motherboard"),
                             (RamMemory) getRandomPcPart("RamMemory")));
+                    logService.createNewLog("Created new PreBuiltPc");
                     break;
                 case 5:
                     Laptop l = new Laptop(g.generateId(), g.generateModelName(), g.generateManufacturer()
                             ,(Processor) getRandomPcPart("Processor"), (Motherboard) getRandomPcPart("Motherboard"),
-                            (RamMemory) getRandomPcPart("RamMemory"), g.generateRefreshRate(),g.generatEdiagonalList());
+                            (RamMemory) getRandomPcPart("RamMemory"), g.generateRefreshRate(),g.generateDiagonalList());
+                    logService.createNewLog("Created new Laptop");
                     store.addStoreItem(l);
                     store.addStoreLaptopsItem(l);
                     break;
                 case 6:
                     store.addStoreItem(new PreBuilPcFullKit(g.generateId(), g.generateModelName(), g.generateManufacturer()
                             ,(Processor) getRandomPcPart("Processor"), (Motherboard) getRandomPcPart("Motherboard"),
-                            (RamMemory) getRandomPcPart("RamMemory"), g.generateRefreshRate(),g.generatEdiagonalList(),
+                            (RamMemory) getRandomPcPart("RamMemory"), g.generateRefreshRate(),g.generateDiagonalList(),
                             (Mouse) getRandomPcPart("Mouse"), (Keyboard) getRandomPcPart("Keyboard")));
+                    logService.createNewLog("Created new PreBuilPcFullKit");
                     break;
             }
 
@@ -154,6 +170,8 @@ public class PcShopServices {
             System.out.println(e.toString());
         }
 
+        logService.createNewLog("Requested worst three items of type" + type);
+
         return null;
     }
 
@@ -168,6 +186,8 @@ public class PcShopServices {
                 System.out.println(item);
             }
 
+            logService.createNewLog("Requested to show all items with the same manufacturer");
+
         }
         catch (Exception e){
             System.out.println(e.toString());
@@ -179,7 +199,9 @@ public class PcShopServices {
             ArrayList<Item> arrayList = getAllComponentsOfAType(type);
             Collections.sort(arrayList);
             Collections.reverse(arrayList);
+            logService.createNewLog("Requested best three items of type" + type);
             return arrayList.subList(0,3);
+
         }
         catch (Exception e){
             System.out.println(e.toString());
@@ -192,6 +214,40 @@ public class PcShopServices {
         for (Laptop laptop : store.getStoreLaptops()) {
             System.out.println(laptop);
         }
+        logService.createNewLog("Requested to show all laptops in store");
+
     }
 
+
+
+    public void readFromCSV() {
+        RWServiceKeyboard rwServiceKeyboard = RWServiceKeyboard.getInstance();
+        rwServiceKeyboard.read(store);
+        RWServiceMouse rwServiceMouse = RWServiceMouse.getInstance();
+        rwServiceMouse.read(store);
+        RWServiceProcessor rwServiceProcessor = RWServiceProcessor.getInstance();
+        rwServiceProcessor.read(store);
+        RWServiceMotherboard rwServiceMotherboard = RWServiceMotherboard.getInstance();
+        rwServiceMotherboard.read(store);
+        RWServiceRamMemory rwServiceRamMemory = RWServiceRamMemory.getInstance();
+        rwServiceRamMemory.read(store);
+        logService.createNewLog("Read from CSV");
+
+    }
+
+    public void writeToCSV() {
+        RWServiceKeyboard rwServiceKeyboard = RWServiceKeyboard.getInstance();
+        rwServiceKeyboard.write(getAllComponentsOfAType("Keyboard"));
+        RWServiceMotherboard rwServiceMotherboard = RWServiceMotherboard.getInstance();
+        rwServiceMotherboard.write(getAllComponentsOfAType("Motherboard"));
+        RWServiceMouse rwServiceMouse = RWServiceMouse.getInstance();
+        rwServiceMouse.write(getAllComponentsOfAType("Mouse"));
+        RWServiceProcessor rwServiceProcessor = RWServiceProcessor.getInstance();
+        rwServiceProcessor.write(getAllComponentsOfAType("Processor"));
+        RWServiceRamMemory rwServiceRamMemory = RWServiceRamMemory.getInstance();
+        rwServiceRamMemory.write(getAllComponentsOfAType("RamMemory"));
+        logService.createNewLog("Write to CSV");
+
+
+    }
 }

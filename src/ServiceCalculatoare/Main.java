@@ -10,6 +10,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         PcShopServices service = new PcShopServices();
+        service.readFromCSV();
 
         int newItemNumber = 1;
 
@@ -19,7 +20,7 @@ public class Main {
             System.out.println("Stop = 0\ngenerateNewComponentAndAddToStore = 1\nshowAllElementsInStoreByType = 2\ngetAllElementsByTypeInStore = 3\n" +
                     "getAllComponentsOfAType = 4\nshowAllElementsInStore = 5\ngetRandomPcPart = 6\ncreateNewFinalProduct = 7\n" +
                     "getBestThreeItemsOfASpecifiedType = 8\nshowAllItemsWithTheSameManufacturer = 9\ngetBestThreeItemsOfASpecifiedType = 10\n" +
-                    "showAllLaptopsInStoreSorted = 11\n");
+                    "showAllLaptopsInStoreSortedFromWorstToBest = 11\nreadFromCSV = 12\nwriteToCSV = 13\n");
             System.out.print("Obiectul dorit: ");
 
             Scanner scanner = new Scanner(System.in);
@@ -80,6 +81,11 @@ public class Main {
                 case 11:
                     service.showAllLaptopsInStore();
                     break;
+                case 12:
+                    service.readFromCSV();
+                    break;
+                case 13:
+                    service.writeToCSV();
             }
         }
 

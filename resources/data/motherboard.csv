@@ -1,0 +1,4 @@
+id,modelName,manufacturer,powerDrown,socket,memoryType,format,numberOfSata,chipsetName
+4000,i5-12600,Asrock,35,LGA12,DDR5,ATX,6,X578
+4001,R7 5800,Asus,25,AM4,DDR4,ATX,4,B550
+4002,F,Huawei,100,LGA1155,DDR2,mini-ITX,4,H670

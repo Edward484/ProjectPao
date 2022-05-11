@@ -1,0 +1,3 @@
+id,modelName,manufacturer,connectionInterface,numberOfButtons,dpi
+2000,A,Asus,USB2,12,4000
+2001,B,Logitech,USB3,15,1600

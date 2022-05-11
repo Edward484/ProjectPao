@@ -67,7 +67,7 @@ public class Generator {
         return refreshRateList.get(randomInt);
     }
 
-    public Integer generatEdiagonalList (){
+    public Integer generateDiagonalList(){
         Random r = new Random();
         int randomInt = r.nextInt(diagonalList.size());
         return diagonalList.get(randomInt);

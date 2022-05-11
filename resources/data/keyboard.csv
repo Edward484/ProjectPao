@@ -1,0 +1,4 @@
+id,modelName,manufacturer,connectionInterface,layout,isMechanical
+1000,A,Acer,USB2,EN-US,1
+1001,B,Acer,USB3,EN-US,0
+1002,L,Huawei,USB-c,ES,0

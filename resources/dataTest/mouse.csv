@@ -1,0 +1,12 @@
+id,modelName,manufacturer,powerDrown,socket,memoryType,format,numberOfSata,chipsetName
+2000,A,Asus,USB2,12,4000
+2001,B,Logitech,USB3,15,1600
+2002,D,Dell,USB-c,20,8000
+2000,A,Asus,USB2,12,4000
+2001,B,Logitech,USB3,15,1600
+2002,D,Dell,USB-c,20,8000
+2010,I,Apple,USB2.0,10,4800
+5950,D,Intel,USB3.2,2,160
+2000,A,Asus,USB2,12,4000
+2001,B,Logitech,USB3,15,1600
+2002,D,Dell,USB-c,20,8000

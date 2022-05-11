@@ -14,6 +14,22 @@ public class Mouse extends PeripheralPcPart implements Comparable<Item>{
         this.dpi = dpi;
     }
 
+    public Integer getNumberOfButtons() {
+        return numberOfButtons;
+    }
+
+    public void setNumberOfButtons(Integer numberOfButtons) {
+        this.numberOfButtons = numberOfButtons;
+    }
+
+    public Integer getDpi() {
+        return dpi;
+    }
+
+    public void setDpi(Integer dpi) {
+        this.dpi = dpi;
+    }
+
     @Override
     public String toString() {
         return "Mouse{" +
