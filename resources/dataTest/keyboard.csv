@@ -5,11 +5,7 @@ id,modelName,manufacturer,connectionInterface,layout,isMechanical
 1000,A,Acer,USB2,EN-US,1
 1001,B,Acer,USB3,EN-US,0
 1002,L,Huawei,USB-c,ES,0
-5507,I,Apple,USB3.0,US,1
-1435,C,Gigabyte,USB3.2,UK,0
-7075,K,AMD,USB3.0,UK,1
-7079,H,Acer,USB2.0,RO,1
-3588,D,Intel,USB2.0,UK,0
 1000,A,Acer,USB2,EN-US,1
 1001,B,Acer,USB3,EN-US,0
 1002,L,Huawei,USB-c,ES,0
+3090,K,Gigabyte,USB3.2,ES,1

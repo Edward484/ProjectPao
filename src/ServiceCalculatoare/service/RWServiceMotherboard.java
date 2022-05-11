@@ -11,12 +11,11 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 
-public class RWServiceMotherboard {
-    private static final String filePath =  "resources/data/motherboard.csv";
-    private static final String fileTestPathWrite =  "resources/dataTest/motherboard.csv";
+public class RWServiceMotherboard extends RWServiceGeneric<Motherboard> {
     private static final RWServiceMotherboard instance = new RWServiceMotherboard();
 
     private RWServiceMotherboard() {
+        super("motherboard");
     }
 
     public static RWServiceMotherboard getInstance() {
@@ -39,8 +38,7 @@ public class RWServiceMotherboard {
                 String format = item[6];
                 Integer numberOfSata = Integer.parseInt(item[7]);
                 String chipsetName = item[8];
-                Motherboard motherboard = new Motherboard(id,modelName,manufacturer,powerDrown,socket,memoryType,format,numberOfSata,chipsetName);
-                store.addStoreItem(motherboard);
+                addToStore(new Motherboard(id,modelName,manufacturer,powerDrown,socket,memoryType,format,numberOfSata,chipsetName),store);
 
             }
         }

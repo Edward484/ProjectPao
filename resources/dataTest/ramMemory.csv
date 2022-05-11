@@ -3,6 +3,6 @@ id,modelName,manufacturer,powerDrown,size,memoryType,frequency
 5001,ShadowRGB,Asus,3,32,DDR4,3200
 5000,Rocket,Gigabit,2,16,DDR5,4800
 5001,ShadowRGB,Asus,3,32,DDR4,3200
-5691,G,HP,100,16,DDR5,2500
 5000,Rocket,Gigabit,2,16,DDR5,4800
 5001,ShadowRGB,Asus,3,32,DDR4,3200
+2656,D,Gigabyte,200,64,DDR4,4600

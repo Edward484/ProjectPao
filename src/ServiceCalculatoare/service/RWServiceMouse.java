@@ -11,12 +11,11 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 
-public class RWServiceMouse {
-    private static final String filePath = "resources/data/mouse.csv";
-    private static final String fileTestPathWrite =  "resources/dataTest/mouse.csv";
+public class RWServiceMouse extends RWServiceGeneric<Mouse> {
     private static final RWServiceMouse instance = new RWServiceMouse();
 
     private RWServiceMouse() {
+        super("mouse");
     }
 
     public static RWServiceMouse getInstance() {
@@ -36,8 +35,7 @@ public class RWServiceMouse {
                 String connectionInterface = item[3];
                 Integer numberOfButtons = Integer.parseInt(item[4]);
                 Integer dpi = Integer.parseInt(item[5]);
-                Mouse mouse = new Mouse(id,modelName,manufacturer,connectionInterface,numberOfButtons,dpi);
-                store.addStoreItem(mouse);
+                addToStore(new Mouse(id,modelName,manufacturer,connectionInterface,numberOfButtons,dpi),store);
 
             }
         }

@@ -11,12 +11,11 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 
-public class RWServiceProcessor {
-    private static final String filePath = "resources/data/processor.csv";
-    private static final String fileTestPathWrite =  "resources/dataTest/processor.csv";
+public class RWServiceProcessor extends RWServiceGeneric<Processor> {
     private static final RWServiceProcessor instance = new RWServiceProcessor();
 
     private RWServiceProcessor() {
+        super("processor");
     }
 
     public static RWServiceProcessor getInstance() {
@@ -39,8 +38,7 @@ public class RWServiceProcessor {
                 Integer numberOfCores = Integer.parseInt(item[6]);
                 Integer numberOfThreads = Integer.parseInt(item[7]);
                 Integer frequency = Integer.parseInt(item[8]);
-                Processor processor = new Processor(id,modelName,manufacturer,powerDrown,socket,manufacturingProcess,numberOfCores,numberOfThreads,frequency);
-                store.addStoreItem(processor);
+                addToStore(new Processor(id,modelName,manufacturer,powerDrown,socket,manufacturingProcess,numberOfCores,numberOfThreads,frequency),store);
 
             }
         }

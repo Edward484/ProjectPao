@@ -14,12 +14,11 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 
-public class RWServiceRamMemory {
-    private static final String filePath = "resources/data/ramMemory.csv";
-    private static final String fileTestPathWrite =  "resources/dataTest/ramMemory.csv";
+public class RWServiceRamMemory extends RWServiceGeneric<RamMemory> {
     private static final RWServiceRamMemory instance = new RWServiceRamMemory();
 
     private RWServiceRamMemory() {
+        super("ramMemory");
     }
 
     public static RWServiceRamMemory getInstance() {
@@ -40,9 +39,7 @@ public class RWServiceRamMemory {
                 Integer size = Integer.parseInt(item[4]);
                 String memoryType = item[5];
                 Integer frequency = Integer.parseInt(item[6]);
-                RamMemory ramMemory = new RamMemory(id,modelName,manufacturer,powerDrown,size,memoryType,frequency);
-                store.addStoreItem(ramMemory);
-
+                addToStore(new RamMemory(id,modelName,manufacturer,powerDrown,size,memoryType,frequency),store);
             }
         }
         catch (NoSuchFileException e){

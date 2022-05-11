@@ -14,12 +14,11 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Set;
 
-public class RWServiceKeyboard {
-    private static final String filePath =  "resources/data/keyboard.csv";
-    private static final String fileTestPathWrite =  "resources/dataTest/keyboard.csv";
+public class RWServiceKeyboard extends RWServiceGeneric<Keyboard> {
     private static final RWServiceKeyboard instance = new RWServiceKeyboard();
 
     private RWServiceKeyboard() {
+        super("keyboard");
     }
 
     private boolean convertToBool(String i){
@@ -49,8 +48,7 @@ public class RWServiceKeyboard {
                 String connectionInterface = item[3];
                 String layout = item[4];
                 Boolean isMechanical = convertToBool(item[5]);
-                Keyboard keyboard = new Keyboard(id,modelName,manufacturer,connectionInterface,layout,isMechanical);
-                store.addStoreItem(keyboard);
+                addToStore(new Keyboard(id,modelName,manufacturer,connectionInterface,layout,isMechanical),store);
 
             }
         }
