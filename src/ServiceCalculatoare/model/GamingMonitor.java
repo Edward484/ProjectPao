@@ -1,4 +1,4 @@
-package ServiceCalculatoare.classes;
+package ServiceCalculatoare.model;
 
 public class GamingMonitor extends PeripheralPcPart implements Monitor, Comparable<Item>{
     Integer refreshRate;
@@ -40,7 +40,12 @@ public class GamingMonitor extends PeripheralPcPart implements Monitor, Comparab
 
     @Override
     public int compareTo(Item u) {
-        GamingMonitor o = (GamingMonitor) u;
-        return refreshRate.compareTo(o.refreshRate);
+        try {
+            GamingMonitor o = (GamingMonitor) u;
+            return refreshRate.compareTo(o.refreshRate);
+        }
+        catch (ClassCastException e){
+            return id.compareTo(u.id);
+        }
     }
 }

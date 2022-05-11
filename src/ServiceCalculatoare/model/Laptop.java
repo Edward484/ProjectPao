@@ -1,4 +1,4 @@
-package ServiceCalculatoare.classes;
+package ServiceCalculatoare.model;
 
 public class Laptop extends Item implements Monitor, Comparable<Item>{
     Processor cpu;
@@ -43,10 +43,16 @@ public class Laptop extends Item implements Monitor, Comparable<Item>{
 
     @Override
     public int compareTo(Item u) {
-        PreBuilPcFullKit o = (PreBuilPcFullKit) u;
-        int r = cpu.compareTo(o.cpu);
-        if(r == 0)
-            return ramMemory.compareTo(o.ramMemory);
-        return r;
+        try {
+            Laptop o = (Laptop) u;
+            int r = cpu.compareTo(o.cpu);
+            if (r == 0)
+                return ramMemory.compareTo(o.ramMemory);
+            return r;
+        }
+        catch (ClassCastException e){
+            int t = id.compareTo(u.id);
+            return t;
+        }
     }
 }

@@ -1,4 +1,4 @@
-package ServiceCalculatoare.classes;
+package ServiceCalculatoare.model;
 
 public class RamMemory extends InternalPcPart implements Comparable<Item>{
     Integer size;
@@ -56,11 +56,17 @@ public class RamMemory extends InternalPcPart implements Comparable<Item>{
 
     @Override
     public int compareTo(Item u) {
-        RamMemory o = (RamMemory) u;
-        int r = size.compareTo(o.size);
-        if(r == 0){
-            return frequency.compareTo(o.frequency);
+        try {
+            RamMemory o = (RamMemory) u;
+            int r = size.compareTo(o.size);
+            if (r == 0) {
+                return frequency.compareTo(o.frequency);
+            }
+            return r;
         }
-        return r;
+        catch (ClassCastException e){
+            int t = id.compareTo(u.id);
+            return t;
+        }
     }
 }

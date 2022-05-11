@@ -1,4 +1,4 @@
-package ServiceCalculatoare.classes.payment;
+package ServiceCalculatoare.model.payment;
 
 public class PayPalPayment implements PaymentMethod{
     String email;

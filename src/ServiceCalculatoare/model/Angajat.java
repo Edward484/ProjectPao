@@ -1,4 +1,4 @@
-package ServiceCalculatoare.classes;
+package ServiceCalculatoare.model;
 
 public class Angajat {
     String nume;

@@ -1,4 +1,4 @@
-package ServiceCalculatoare.classes;
+package ServiceCalculatoare.model;
 
 public abstract class PeripheralPcPart extends Item{
     protected String connectionInterface;

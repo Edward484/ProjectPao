@@ -1,4 +1,4 @@
-package ServiceCalculatoare.classes;
+package ServiceCalculatoare.model;
 
 
 public abstract class Item implements Comparable<Item>  {
@@ -41,7 +41,6 @@ public abstract class Item implements Comparable<Item>  {
     public void setManufacturer(String manufacturer) {
         this.manufacturer = manufacturer;
     }
-
 
 
 }

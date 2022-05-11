@@ -1,4 +1,4 @@
-package ServiceCalculatoare.classes;
+package ServiceCalculatoare.model;
 
 public class PreBuiltPc extends Item implements Comparable<Item>{
     Processor cpu;
@@ -48,10 +48,16 @@ public class PreBuiltPc extends Item implements Comparable<Item>{
 
     @Override
     public int compareTo(Item u) {
-        PreBuiltPc o = (PreBuiltPc) u;
-        int r = cpu.compareTo(o.cpu);
-        if(r == 0)
-            return ramMemory.compareTo(o.ramMemory);
-        return r;
+        try {
+            PreBuiltPc o = (PreBuiltPc) u;
+            int r = cpu.compareTo(o.cpu);
+            if (r == 0)
+                return ramMemory.compareTo(o.ramMemory);
+            return r;
+        }
+        catch (ClassCastException e){
+            int t = id.compareTo(u.id);
+            return t;
+        }
     }
 }

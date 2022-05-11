@@ -1,6 +1,6 @@
 package ServiceCalculatoare.service;
 
-import ServiceCalculatoare.classes.*;
+import ServiceCalculatoare.model.*;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -71,8 +71,8 @@ public class PcShopServices {
         try {
             Map<String, ArrayList<Item>> store = getAllElementsByTypeInStore();
             for (String key : store.keySet()) {
-                if (Objects.equals(key, String.format("ServiceCalculatoare.classes.%s", type))) {
-                    return store.get(String.format("ServiceCalculatoare.classes.%s", type));
+                if (Objects.equals(key, String.format("ServiceCalculatoare.model.%s", type))) {
+                    return store.get(String.format("ServiceCalculatoare.model.%s", type));
                 }
             }
         }
@@ -127,9 +127,11 @@ public class PcShopServices {
                             (RamMemory) getRandomPcPart("RamMemory")));
                     break;
                 case 5:
-                    store.addStoreItem(new Laptop(g.generateId(), g.generateModelName(), g.generateManufacturer()
+                    Laptop l = new Laptop(g.generateId(), g.generateModelName(), g.generateManufacturer()
                             ,(Processor) getRandomPcPart("Processor"), (Motherboard) getRandomPcPart("Motherboard"),
-                            (RamMemory) getRandomPcPart("RamMemory"), g.generateRefreshRate(),g.generatEdiagonalList()));
+                            (RamMemory) getRandomPcPart("RamMemory"), g.generateRefreshRate(),g.generatEdiagonalList());
+                    store.addStoreItem(l);
+                    store.addStoreLaptopsItem(l);
                     break;
                 case 6:
                     store.addStoreItem(new PreBuilPcFullKit(g.generateId(), g.generateModelName(), g.generateManufacturer()
@@ -184,6 +186,12 @@ public class PcShopServices {
         }
 
         return null;
+    }
+
+    public void showAllLaptopsInStore() {
+        for (Laptop laptop : store.getStoreLaptops()) {
+            System.out.println(laptop);
+        }
     }
 
 }

@@ -1,4 +1,4 @@
-package ServiceCalculatoare.classes;
+package ServiceCalculatoare.model;
 
 public class Mouse extends PeripheralPcPart implements Comparable<Item>{
     Integer numberOfButtons;
@@ -28,7 +28,13 @@ public class Mouse extends PeripheralPcPart implements Comparable<Item>{
 
     @Override
     public int compareTo(Item u) {
-        Mouse o = (Mouse) u;
-        return dpi.compareTo(o.dpi);
+        try {
+            Mouse o = (Mouse) u;
+            return dpi.compareTo(o.dpi);
+        }
+        catch (ClassCastException e){
+            int t = id.compareTo(u.id);
+            return t;
+        }
     }
 }

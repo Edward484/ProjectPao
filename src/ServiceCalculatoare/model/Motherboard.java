@@ -1,4 +1,4 @@
-package ServiceCalculatoare.classes;
+package ServiceCalculatoare.model;
 
 public class Motherboard extends InternalPcPart implements Comparable<Item>{
     String socket;
@@ -81,8 +81,14 @@ public class Motherboard extends InternalPcPart implements Comparable<Item>{
 
     @Override
     public int compareTo(Item u) {
-        Motherboard o = (Motherboard) u;
-        return numberOfSata.compareTo(o.numberOfSata);
+        try {
+            Motherboard o = (Motherboard) u;
+            return numberOfSata.compareTo(o.numberOfSata);
+        }
+        catch (ClassCastException e){
+            int t = id.compareTo(u.id);
+            return t;
+        }
 
     }
 }

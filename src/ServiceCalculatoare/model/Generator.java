@@ -1,4 +1,4 @@
-package ServiceCalculatoare.classes;
+package ServiceCalculatoare.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;

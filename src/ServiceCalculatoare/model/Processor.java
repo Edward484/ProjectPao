@@ -1,4 +1,4 @@
-package ServiceCalculatoare.classes;
+package ServiceCalculatoare.model;
 
 public class Processor extends InternalPcPart implements Comparable<Item> {
     String socket;
@@ -81,10 +81,16 @@ public class Processor extends InternalPcPart implements Comparable<Item> {
 
     @Override
     public int compareTo(Item u) {
-        Processor o = (Processor) u;
-        int r = numberOfCores.compareTo(o.numberOfCores);
-        if(r == 0)
-            return frequency.compareTo(o.frequency);
-        return r;
+        try {
+            Processor o = (Processor) u;
+            int r = numberOfCores.compareTo(o.numberOfCores);
+            if (r == 0)
+                return frequency.compareTo(o.frequency);
+            return r;
+        }
+        catch (ClassCastException e){
+            int t = id.compareTo(u.id);
+            return t;
+        }
     }
 }

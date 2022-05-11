@@ -1,4 +1,4 @@
-package ServiceCalculatoare.classes;
+package ServiceCalculatoare.model;
 
 public abstract class InternalPcPart extends Item{
     protected Integer powerDrown;

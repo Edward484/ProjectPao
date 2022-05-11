@@ -1,4 +1,4 @@
-package ServiceCalculatoare.classes;
+package ServiceCalculatoare.model;
 
 public class Keyboard extends PeripheralPcPart implements Comparable<Item> {
     String layout;
@@ -45,7 +45,13 @@ public class Keyboard extends PeripheralPcPart implements Comparable<Item> {
 
     @Override
     public int compareTo(Item u) {
-        Keyboard o = (Keyboard) u;
-        return isMechanical.compareTo(o.isMechanical);
+        try{
+            Keyboard o = (Keyboard) u;
+            return isMechanical.compareTo(o.isMechanical);
+        }
+        catch (ClassCastException e){
+            int t = id.compareTo(u.id);
+            return t;
+        }
     }
 }
