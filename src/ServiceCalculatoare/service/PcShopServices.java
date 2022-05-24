@@ -247,7 +247,57 @@ public class PcShopServices {
         RWServiceRamMemory rwServiceRamMemory = RWServiceRamMemory.getInstance();
         rwServiceRamMemory.write(getAllComponentsOfAType("RamMemory"));
         logService.createNewLog("Write to CSV");
+    }
 
+    public void generateNewComponentAndAddToStoreAndDB() {
+        Integer newItemNumber = 1;
 
+        while (newItemNumber != 0) {
+
+            System.out.println("What item would you like to add to the store?");
+            System.out.println("Stop = 0 | Keyboard = 7 | GamingMonitor = 8 | Mouse = 9 | Motherboard = 10 | " +
+                    "Processor = 11 | RamMemory = 12 | Item = 1 | ");
+            System.out.print("Obiectul dorit: ");
+            Scanner scanner = new Scanner(System.in);
+            newItemNumber = Integer.valueOf(scanner.nextLine());
+
+            switch (newItemNumber) {
+                case 7:
+                    RWServiceKeyboard rwServiceKeyboard = RWServiceKeyboard.getInstance();
+                    Keyboard k = new Keyboard(g.generateId(), g.generateModelName(), g.generateManufacturer(), g.generateConnectionInterface(),
+                            g.generateLayout(), g.generateBool());
+                    store.addStoreItem(k);
+                    rwServiceKeyboard.add(k);
+                    logService.createNewLog("Created new keyboard");
+                    break;
+                case 8:
+                    store.addStoreItem(new GamingMonitor(g.generateId(), g.generateModelName(), g.generateManufacturer(), g.generateConnectionInterface(),
+                            g.generateRefreshRate(), g.generateDiagonalList()));
+                    logService.createNewLog("Created new GamingMonitor");
+                    break;
+                case 9:
+                    store.addStoreItem(new Mouse(g.generateId(), g.generateModelName(), g.generateManufacturer(), g.generateConnectionInterface(),
+                            g.generateNumberOfButtons(), g.generateDpi()));
+                    logService.createNewLog("Created new Mouse");
+                    break;
+                case 10:
+                    store.addStoreItem(new Motherboard(g.generateId(), g.generateModelName(), g.generateManufacturer(), g.generatePowerDrown(),
+                            g.generateSocket(), g.generateMemoryType(), g.generateFormat(), g.generateNumberOfSata(), g.generateChipsetName()));
+                    logService.createNewLog("Created new Motherboard");
+                    break;
+                case 11:
+                    Integer numOfCores = g.generateNumberOfCores();
+                    store.addStoreItem(new Processor(g.generateId(), g.generateModelName(), g.generateManufacturer(), g.generatePowerDrown(),
+                            g.generateSocket(), g.generateManufacturingProcess(), numOfCores, numOfCores * 2, g.generateFrequency()));
+                    logService.createNewLog("Created new Processor");
+                    break;
+                case 12:
+                    store.addStoreItem(new RamMemory(g.generateId(), g.generateModelName(), g.generateManufacturer(), g.generatePowerDrown(),
+                            g.generateSize(), g.generateMemoryType(), g.generateFrequency()));
+                    logService.createNewLog("Created new RamMemory");
+                    break;
+
+            }
+        }
     }
 }

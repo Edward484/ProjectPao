@@ -20,7 +20,7 @@ public class Main {
             System.out.println("Stop = 0\ngenerateNewComponentAndAddToStore = 1\nshowAllElementsInStoreByType = 2\ngetAllElementsByTypeInStore = 3\n" +
                     "getAllComponentsOfAType = 4\nshowAllElementsInStore = 5\ngetRandomPcPart = 6\ncreateNewFinalProduct = 7\n" +
                     "getBestThreeItemsOfASpecifiedType = 8\nshowAllItemsWithTheSameManufacturer = 9\ngetBestThreeItemsOfASpecifiedType = 10\n" +
-                    "showAllLaptopsInStoreSortedFromWorstToBest = 11\nreadFromCSV = 12\nwriteToCSV = 13\n");
+                    "showAllLaptopsInStoreSortedFromWorstToBest = 11\nreadFromCSV = 12\nwriteToCSV = 13\ngenerateNewComponentAndAddToStoreAndDB = 14\n");
             System.out.print("Obiectul dorit: ");
 
             Scanner scanner = new Scanner(System.in);
@@ -86,6 +86,9 @@ public class Main {
                     break;
                 case 13:
                     service.writeToCSV();
+                case 14:
+                    service.generateNewComponentAndAddToStoreAndDB();
+                    break;
             }
         }
 

@@ -1,5 +1,6 @@
 package ServiceCalculatoare.service;
 
+import ServiceCalculatoare.config.DbConnection;
 import ServiceCalculatoare.model.Item;
 import ServiceCalculatoare.model.Keyboard;
 import ServiceCalculatoare.model.Store;
@@ -11,6 +12,8 @@ import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -33,6 +36,20 @@ public class RWServiceKeyboard extends RWServiceGeneric<Keyboard> {
 
     public static RWServiceKeyboard getInstance() {
         return instance;
+    }
+
+    public void add(Keyboard keyboard) {
+        String sql = "insert into keyboards values (null, ?, ?, ?, ?, ?) ";
+        try (PreparedStatement statement = DbConnection.getInstance().prepareStatement(sql)) {
+            statement.setString(1, keyboard.getLayout());
+            statement.setBoolean(2, keyboard.getMechanical());
+            statement.setString(3, keyboard.getConnectionInterface());
+            statement.setString(4, keyboard.getModelName());
+            statement.setString(5, keyboard.getManufacturer());
+            statement.executeUpdate();
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void read(Store store){
