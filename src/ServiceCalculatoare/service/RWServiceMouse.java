@@ -1,5 +1,6 @@
 package ServiceCalculatoare.service;
 
+import ServiceCalculatoare.config.DbConnection;
 import ServiceCalculatoare.model.*;
 
 import java.io.BufferedReader;
@@ -9,6 +10,8 @@ import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class RWServiceMouse extends RWServiceGeneric<Mouse> {
@@ -20,6 +23,22 @@ public class RWServiceMouse extends RWServiceGeneric<Mouse> {
 
     public static RWServiceMouse getInstance() {
         return instance;
+    }
+
+    public void add(Mouse mouse) {
+        String sql = "insert into mouses values (null, ?, ?, ?, ?, ?,?) ";
+        try (PreparedStatement statement = DbConnection.getInstance().prepareStatement(sql)) {
+            statement.setString(1, mouse.getModelName());
+            statement.setString(2, mouse.getManufacturer());
+            statement.setString(3, mouse.getConnectionInterface());
+            statement.setInt(4, mouse.getNumberOfButtons());
+            statement.setInt(5,mouse.getDpi() );
+            statement.setInt(6, mouse.getId());
+
+            statement.executeUpdate();
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void read(Store store){

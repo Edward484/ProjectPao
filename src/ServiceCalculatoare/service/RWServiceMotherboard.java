@@ -1,5 +1,6 @@
 package ServiceCalculatoare.service;
 
+import ServiceCalculatoare.config.DbConnection;
 import ServiceCalculatoare.model.*;
 
 import java.io.BufferedReader;
@@ -9,6 +10,8 @@ import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class RWServiceMotherboard extends RWServiceGeneric<Motherboard> {
@@ -20,6 +23,25 @@ public class RWServiceMotherboard extends RWServiceGeneric<Motherboard> {
 
     public static RWServiceMotherboard getInstance() {
         return instance;
+    }
+
+    public void add(Motherboard motherboard) {
+        String sql = "insert into motherboards values (null, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
+        try (PreparedStatement statement = DbConnection.getInstance().prepareStatement(sql)) {
+            statement.setString(1, motherboard.getModelName());
+            statement.setString(2, motherboard.getManufacturer() );
+            statement.setInt(3, motherboard.getPowerDrown());
+            statement.setString(4, motherboard.getSocket());
+            statement.setString(5,motherboard.getMemoryType() );
+            statement.setString(6,motherboard.getFormat() );
+            statement.setInt(7, motherboard.getNumberOfSata());
+            statement.setString(8, motherboard.getChipsetName());
+            statement.setInt(9, motherboard.getId());
+
+            statement.executeUpdate();
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void read(Store store){

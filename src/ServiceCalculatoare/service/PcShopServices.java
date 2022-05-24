@@ -276,19 +276,28 @@ public class PcShopServices {
                     logService.createNewLog("Created new GamingMonitor");
                     break;
                 case 9:
-                    store.addStoreItem(new Mouse(g.generateId(), g.generateModelName(), g.generateManufacturer(), g.generateConnectionInterface(),
-                            g.generateNumberOfButtons(), g.generateDpi()));
+                    RWServiceMouse rwServiceMouse = RWServiceMouse.getInstance();
+                    Mouse m = new Mouse(g.generateId(), g.generateModelName(), g.generateManufacturer(), g.generateConnectionInterface(),
+                            g.generateNumberOfButtons(), g.generateDpi());
+                    store.addStoreItem(m);
+                    rwServiceMouse.add(m);
                     logService.createNewLog("Created new Mouse");
                     break;
                 case 10:
-                    store.addStoreItem(new Motherboard(g.generateId(), g.generateModelName(), g.generateManufacturer(), g.generatePowerDrown(),
-                            g.generateSocket(), g.generateMemoryType(), g.generateFormat(), g.generateNumberOfSata(), g.generateChipsetName()));
+                    RWServiceMotherboard rwServiceMotherboard = RWServiceMotherboard.getInstance();
+                    Motherboard mobo = new Motherboard(g.generateId(), g.generateModelName(), g.generateManufacturer(), g.generatePowerDrown(),
+                            g.generateSocket(), g.generateMemoryType(), g.generateFormat(), g.generateNumberOfSata(), g.generateChipsetName());
+                    store.addStoreItem(mobo);
+                    rwServiceMotherboard.add(mobo);
                     logService.createNewLog("Created new Motherboard");
                     break;
                 case 11:
+                    RWServiceProcessor rwServiceProcessor = RWServiceProcessor.getInstance();
                     Integer numOfCores = g.generateNumberOfCores();
-                    store.addStoreItem(new Processor(g.generateId(), g.generateModelName(), g.generateManufacturer(), g.generatePowerDrown(),
-                            g.generateSocket(), g.generateManufacturingProcess(), numOfCores, numOfCores * 2, g.generateFrequency()));
+                    Processor p = new Processor(g.generateId(), g.generateModelName(), g.generateManufacturer(), g.generatePowerDrown(),
+                            g.generateSocket(), g.generateManufacturingProcess(), numOfCores, numOfCores * 2, g.generateFrequency());
+                    store.addStoreItem(p);
+                    rwServiceProcessor.add(p);
                     logService.createNewLog("Created new Processor");
                     break;
                 case 12:

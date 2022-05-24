@@ -1,9 +1,7 @@
 package ServiceCalculatoare.service;
 
-import ServiceCalculatoare.model.Item;
-import ServiceCalculatoare.model.Processor;
-import ServiceCalculatoare.model.RamMemory;
-import ServiceCalculatoare.model.Store;
+import ServiceCalculatoare.config.DbConnection;
+import ServiceCalculatoare.model.*;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -12,6 +10,8 @@ import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class RWServiceRamMemory extends RWServiceGeneric<RamMemory> {
@@ -24,6 +24,7 @@ public class RWServiceRamMemory extends RWServiceGeneric<RamMemory> {
     public static RWServiceRamMemory getInstance() {
         return instance;
     }
+
 
     public void read(Store store){
         try{

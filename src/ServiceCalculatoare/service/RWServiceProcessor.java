@@ -1,5 +1,6 @@
 package ServiceCalculatoare.service;
 
+import ServiceCalculatoare.config.DbConnection;
 import ServiceCalculatoare.model.*;
 
 import java.io.BufferedReader;
@@ -9,6 +10,8 @@ import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class RWServiceProcessor extends RWServiceGeneric<Processor> {
@@ -20,6 +23,24 @@ public class RWServiceProcessor extends RWServiceGeneric<Processor> {
 
     public static RWServiceProcessor getInstance() {
         return instance;
+    }
+
+    public void add(Processor processor) {
+        String sql = "insert into processors values (null, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
+        try (PreparedStatement statement = DbConnection.getInstance().prepareStatement(sql)) {
+            statement.setString(1, processor.getModelName());
+            statement.setString(2, processor.getManufacturer());
+            statement.setInt(3, processor.getPowerDrown());
+            statement.setString(4, processor.getSocket());
+            statement.setInt(5, processor.getManufacturingProcess());
+            statement.setInt(6, processor.getNumberOfCores());
+            statement.setInt(7, processor.getNumberOfThreads());
+            statement.setInt(8, processor.getFrequency());
+            statement.setInt(9, processor.getId());
+            statement.executeUpdate();
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void read(Store store){

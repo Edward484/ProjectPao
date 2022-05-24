@@ -39,13 +39,15 @@ public class RWServiceKeyboard extends RWServiceGeneric<Keyboard> {
     }
 
     public void add(Keyboard keyboard) {
-        String sql = "insert into keyboards values (null, ?, ?, ?, ?, ?) ";
+        String sql = "insert into keyboards values (null, ?, ?, ?, ?, ?, ?) ";
         try (PreparedStatement statement = DbConnection.getInstance().prepareStatement(sql)) {
             statement.setString(1, keyboard.getLayout());
             statement.setBoolean(2, keyboard.getMechanical());
             statement.setString(3, keyboard.getConnectionInterface());
             statement.setString(4, keyboard.getModelName());
             statement.setString(5, keyboard.getManufacturer());
+            statement.setInt(6, keyboard.getId());
+
             statement.executeUpdate();
         } catch(SQLException e) {
             e.printStackTrace();
