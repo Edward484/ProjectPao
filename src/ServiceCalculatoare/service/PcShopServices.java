@@ -270,11 +270,6 @@ public class PcShopServices {
                     rwServiceKeyboard.add(k);
                     logService.createNewLog("Created new keyboard");
                     break;
-                case 8:
-                    store.addStoreItem(new GamingMonitor(g.generateId(), g.generateModelName(), g.generateManufacturer(), g.generateConnectionInterface(),
-                            g.generateRefreshRate(), g.generateDiagonalList()));
-                    logService.createNewLog("Created new GamingMonitor");
-                    break;
                 case 9:
                     RWServiceMouse rwServiceMouse = RWServiceMouse.getInstance();
                     Mouse m = new Mouse(g.generateId(), g.generateModelName(), g.generateManufacturer(), g.generateConnectionInterface(),
@@ -299,11 +294,6 @@ public class PcShopServices {
                     store.addStoreItem(p);
                     rwServiceProcessor.add(p);
                     logService.createNewLog("Created new Processor");
-                    break;
-                case 12:
-                    store.addStoreItem(new RamMemory(g.generateId(), g.generateModelName(), g.generateManufacturer(), g.generatePowerDrown(),
-                            g.generateSize(), g.generateMemoryType(), g.generateFrequency()));
-                    logService.createNewLog("Created new RamMemory");
                     break;
 
             }
@@ -406,6 +396,74 @@ public class PcShopServices {
                     System.out.println("The processor from db is:");
                     System.out.println(retrivedProc);
                     logService.createNewLog("Retrieved a processor from db");
+                    break;
+
+            }
+        }
+    }
+
+    public void updateAnItemFromDB(){
+        Integer newItemNumber = 1;
+        int id =0;
+        String value;
+
+        while (newItemNumber != 0) {
+
+            System.out.println("What item would you like to update from the store?");
+            System.out.println("Stop = 0 | Keyboard = 7 |  Mouse = 9 | Motherboard = 10 | " +
+                    "Processor = 11 ");
+            System.out.print("Obiectul dorit: ");
+            Scanner scanner = new Scanner(System.in);
+            newItemNumber = Integer.valueOf(scanner.nextLine());
+
+            switch (newItemNumber) {
+                case 7:
+                    RWServiceKeyboard rwServiceKeyboard = RWServiceKeyboard.getInstance();
+                    System.out.println("The id of the object you want to update: ");
+                    id = Integer.valueOf(scanner.nextLine());
+                    System.out.println("The new value of the field: ");
+                    value = scanner.nextLine();
+                    rwServiceKeyboard.updateKeyboardModelNameById(id,value);
+                    Optional<Keyboard> retrivedKB = rwServiceKeyboard.getKeyboardById(id);
+                    System.out.println("The updated keyboard from db is:");
+                    System.out.println(retrivedKB);
+                    logService.createNewLog("Modified a keyboard in db");
+                    break;
+                case 9:
+                    RWServiceMouse rwServiceMouse = RWServiceMouse.getInstance();
+                    System.out.println("The id of the object you want to update: ");
+                    id = Integer.valueOf(scanner.nextLine());
+                    System.out.println("The new value of the field: ");
+                    value = scanner.nextLine();
+                    rwServiceMouse.updateMouseModelNameById(id,value);
+                    Optional<Mouse> retrivedMouse = rwServiceMouse.getMouseById(id);
+                    System.out.println("The mouse from db is:");
+                    System.out.println(retrivedMouse);
+                    logService.createNewLog("Modified a mouse in db");
+                    break;
+                case 10:
+                    RWServiceMotherboard rwServiceMotherboard = RWServiceMotherboard.getInstance();
+                    System.out.println("The id of the object you want to update: ");
+                    id = Integer.valueOf(scanner.nextLine());
+                    System.out.println("The new value of the field: ");
+                    value = scanner.nextLine();
+                    rwServiceMotherboard.updateMotherboardModelNameById(id,value);
+                    Optional<Motherboard> retrivedMobo = rwServiceMotherboard.getMotherboardById(id);
+                    System.out.println("The motherboard from db is:");
+                    System.out.println(retrivedMobo);
+                    logService.createNewLog("Modified a motherboard in db");
+                    break;
+                case 11:
+                    RWServiceProcessor rwServiceProcessor = RWServiceProcessor.getInstance();
+                    System.out.println("The id of the object you want to update: ");
+                    id = Integer.valueOf(scanner.nextLine());
+                    System.out.println("The new value of the field: ");
+                    value = scanner.nextLine();
+                    rwServiceProcessor.updateProcessorModelNameById(id,value);
+                    Optional<Processor> retrivedProc = rwServiceProcessor.getProcessorById(id);
+                    System.out.println("The processor from db is:");
+                    System.out.println(retrivedProc);
+                    logService.createNewLog("Modified a processor in db");
                     break;
 
             }

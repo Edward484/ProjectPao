@@ -70,6 +70,17 @@ public class RWServiceProcessor extends RWServiceGeneric<Processor> {
         return Optional.empty();
     }
 
+    public void updateProcessorModelNameById(int id, String value) {
+        String sql = "update processors set modelName = ? where id = ?";
+        try (PreparedStatement statement = DbConnection.getInstance().prepareStatement(sql)) {
+            statement.setInt(2, id);
+            statement.setString(1, value);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void deleteByDBId(int id){
         String sql = "delete from processors where id = ?";
         try(PreparedStatement statement = DbConnection.getInstance().prepareStatement(sql)) {

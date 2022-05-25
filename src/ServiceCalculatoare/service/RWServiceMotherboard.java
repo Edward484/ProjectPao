@@ -71,6 +71,17 @@ public class RWServiceMotherboard extends RWServiceGeneric<Motherboard> {
         return Optional.empty();
     }
 
+    public void updateMotherboardModelNameById(int id, String value) {
+        String sql = "update motherboards set modelName = ? where id = ?";
+        try (PreparedStatement statement = DbConnection.getInstance().prepareStatement(sql)) {
+            statement.setInt(2, id);
+            statement.setString(1, value);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void deleteByDBId(int id){
         String sql = "delete from motherboards where id = ?";
         try(PreparedStatement statement = DbConnection.getInstance().prepareStatement(sql)) {

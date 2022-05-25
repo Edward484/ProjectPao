@@ -21,7 +21,7 @@ public class Main {
                     "getAllComponentsOfAType = 4\nshowAllElementsInStore = 5\ngetRandomPcPart = 6\ncreateNewFinalProduct = 7\n" +
                     "getBestThreeItemsOfASpecifiedType = 8\nshowAllItemsWithTheSameManufacturer = 9\ngetBestThreeItemsOfASpecifiedType = 10\n" +
                     "showAllLaptopsInStoreSortedFromWorstToBest = 11\nreadFromCSV = 12\nwriteToCSV = 13\ngenerateNewComponentAndAddToStoreAndDB = 14\n" +
-                    "deleteFromDatabase = 15\ngetAnItemFromDB = 16");
+                    "deleteFromDatabase = 15\ngetAnItemFromDB = 16\nupdateAnItemFromDB = 17");
             System.out.print("Obiectul dorit: ");
 
             Scanner scanner = new Scanner(System.in);
@@ -94,6 +94,8 @@ public class Main {
                     service.deleteFromDatabase();
                 case 16:
                     service.getAnItemFromDB();
+                case 17:
+                    service.updateAnItemFromDB();
             }
         }
 

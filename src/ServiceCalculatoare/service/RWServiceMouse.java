@@ -65,6 +65,17 @@ public class RWServiceMouse extends RWServiceGeneric<Mouse> {
         return Optional.empty();
     }
 
+    public void updateMouseModelNameById(int id, String value) {
+        String sql = "update mouses set modelName = ? where id = ?";
+        try (PreparedStatement statement = DbConnection.getInstance().prepareStatement(sql)) {
+            statement.setInt(2, id);
+            statement.setString(1, value);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void deleteByDBId(int id){
         String sql = "delete from mouses where id = ?";
         try(PreparedStatement statement = DbConnection.getInstance().prepareStatement(sql)) {

@@ -77,6 +77,18 @@ public class RWServiceKeyboard extends RWServiceGeneric<Keyboard> {
         return Optional.empty();
     }
 
+    public void updateKeyboardModelNameById(int id, String value) {
+        String sql = "update keyboards set modelName = ? where id = ?";
+        try (PreparedStatement statement = DbConnection.getInstance().prepareStatement(sql)) {
+            statement.setInt(2, id);
+            statement.setString(1, value);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     public void deleteByDBId(int id){
         String sql = "delete from keyboards where id = ?";
         try(PreparedStatement statement = DbConnection.getInstance().prepareStatement(sql)) {
