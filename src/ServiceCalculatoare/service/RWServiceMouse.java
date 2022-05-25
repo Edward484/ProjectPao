@@ -11,8 +11,10 @@ import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class RWServiceMouse extends RWServiceGeneric<Mouse> {
     private static final RWServiceMouse instance = new RWServiceMouse();
@@ -37,6 +39,38 @@ public class RWServiceMouse extends RWServiceGeneric<Mouse> {
 
             statement.executeUpdate();
         } catch(SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Optional<Mouse> getMouseById(int id) {
+        String sql = "select * from mouses va where va.id = ?";
+        try(PreparedStatement statement = DbConnection.getInstance().prepareStatement(sql)) {
+            statement.setLong(1, id);
+            ResultSet result = statement.executeQuery();
+            while(result.next()) {
+                Integer mouseId = result.getInt(1);
+                String modelName = result.getString(2);
+                String manufacturer = result.getString(3);
+                String connesctionInterface = result.getString(4);
+                Integer numberOfButtons = result.getInt(5);
+                Integer dpi = result.getInt(6);
+                Integer internalId = result.getInt(7);
+
+                return Optional.of(new Mouse(mouseId, modelName, manufacturer, connesctionInterface, numberOfButtons, dpi));
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+        return Optional.empty();
+    }
+
+    public void deleteByDBId(int id){
+        String sql = "delete from mouses where id = ?";
+        try(PreparedStatement statement = DbConnection.getInstance().prepareStatement(sql)) {
+            statement.setLong(1, id);
+            statement.executeUpdate();
+        }catch(SQLException e) {
             e.printStackTrace();
         }
     }

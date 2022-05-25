@@ -11,8 +11,10 @@ import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class RWServiceProcessor extends RWServiceGeneric<Processor> {
     private static final RWServiceProcessor instance = new RWServiceProcessor();
@@ -39,6 +41,41 @@ public class RWServiceProcessor extends RWServiceGeneric<Processor> {
             statement.setInt(9, processor.getId());
             statement.executeUpdate();
         } catch(SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Optional<Processor> getProcessorById(int id) {
+        String sql = "select * from processors va where va.id = ?";
+        try(PreparedStatement statement = DbConnection.getInstance().prepareStatement(sql)) {
+            statement.setInt(1, id);
+            ResultSet result = statement.executeQuery();
+            while(result.next()) {
+                Integer processorId = result.getInt(1);
+                String modelName = result.getString(2);
+                String manufacturer = result.getString(3);
+                Integer powerDrown = result.getInt(4);
+                String socket = result.getString(5);
+                Integer manProccess = result.getInt(6);
+                Integer numberOfCores = result.getInt(7);
+                Integer numberOfThreads = result.getInt(8);
+                Integer frequency = result.getInt(9);
+                Integer internalId = result.getInt(10);
+
+                return Optional.of(new Processor(processorId, modelName, manufacturer, powerDrown, socket, manProccess,numberOfCores,numberOfThreads,frequency));
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+        return Optional.empty();
+    }
+
+    public void deleteByDBId(int id){
+        String sql = "delete from processors where id = ?";
+        try(PreparedStatement statement = DbConnection.getInstance().prepareStatement(sql)) {
+            statement.setLong(1, id);
+            statement.executeUpdate();
+        }catch(SQLException e) {
             e.printStackTrace();
         }
     }

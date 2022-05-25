@@ -255,8 +255,8 @@ public class PcShopServices {
         while (newItemNumber != 0) {
 
             System.out.println("What item would you like to add to the store?");
-            System.out.println("Stop = 0 | Keyboard = 7 | GamingMonitor = 8 | Mouse = 9 | Motherboard = 10 | " +
-                    "Processor = 11 | RamMemory = 12 | Item = 1 | ");
+            System.out.println("Stop = 0 | Keyboard = 7 |  Mouse = 9 | Motherboard = 10 | " +
+                    "Processor = 11 | ");
             System.out.print("Obiectul dorit: ");
             Scanner scanner = new Scanner(System.in);
             newItemNumber = Integer.valueOf(scanner.nextLine());
@@ -304,6 +304,108 @@ public class PcShopServices {
                     store.addStoreItem(new RamMemory(g.generateId(), g.generateModelName(), g.generateManufacturer(), g.generatePowerDrown(),
                             g.generateSize(), g.generateMemoryType(), g.generateFrequency()));
                     logService.createNewLog("Created new RamMemory");
+                    break;
+
+            }
+        }
+    }
+
+    public void deleteFromDatabase(){
+        Integer newItemNumber = 1;
+        int id =0;
+
+        while (newItemNumber != 0) {
+
+            System.out.println("What item would you like to remove from db?");
+            System.out.println("Stop = 0 | Keyboard = 7 |  Mouse = 9 | Motherboard = 10 | " +
+                    "Processor = 11 ");
+            System.out.print("Obiectul dorit: ");
+            Scanner scanner = new Scanner(System.in);
+            newItemNumber = Integer.valueOf(scanner.nextLine());
+
+            switch (newItemNumber) {
+                case 7:
+                    RWServiceKeyboard rwServiceKeyboard = RWServiceKeyboard.getInstance();
+                    System.out.println("The id of the object you want to delete: ");
+                    id = Integer.valueOf(scanner.nextLine());
+                    rwServiceKeyboard.deleteByDBId(id);
+                    logService.createNewLog("Deleted a keyboard");
+                    break;
+                case 9:
+                    RWServiceMouse rwServiceMouse = RWServiceMouse.getInstance();
+                    System.out.println("The id of the object you want to delete: ");
+                    id = Integer.valueOf(scanner.nextLine());
+                    rwServiceMouse.deleteByDBId(id);
+                    logService.createNewLog("Deleted a Mouse");
+                    break;
+                case 10:
+                    RWServiceMotherboard rwServiceMotherboard = RWServiceMotherboard.getInstance();
+                    System.out.println("The id of the object you want to delete: ");
+                    id = Integer.valueOf(scanner.nextLine());
+                    rwServiceMotherboard.deleteByDBId(id);
+                    logService.createNewLog("Deleted a Motherboard");
+                    break;
+                case 11:
+                    RWServiceProcessor rwServiceProcessor = RWServiceProcessor.getInstance();
+                    System.out.println("The id of the object you want to delete: ");
+                    id = Integer.valueOf(scanner.nextLine());
+                    rwServiceProcessor.deleteByDBId(id);
+                    logService.createNewLog("Deleted a Processor");
+                    break;
+
+            }
+        }
+    }
+
+    public void getAnItemFromDB(){
+        Integer newItemNumber = 1;
+        int id =0;
+
+        while (newItemNumber != 0) {
+
+            System.out.println("What item would you like to get from the store?");
+            System.out.println("Stop = 0 | Keyboard = 7 |  Mouse = 9 | Motherboard = 10 | " +
+                    "Processor = 11 ");
+            System.out.print("Obiectul dorit: ");
+            Scanner scanner = new Scanner(System.in);
+            newItemNumber = Integer.valueOf(scanner.nextLine());
+
+            switch (newItemNumber) {
+                case 7:
+                    RWServiceKeyboard rwServiceKeyboard = RWServiceKeyboard.getInstance();
+                    System.out.println("The id of the object you want to get: ");
+                    id = Integer.valueOf(scanner.nextLine());
+                    Optional<Keyboard> retrivedKB = rwServiceKeyboard.getKeyboardById(id);
+                    System.out.println("The keyboard from db is:");
+                    System.out.println(retrivedKB);
+                    logService.createNewLog("Retrieved a keyboard from db");
+                    break;
+                case 9:
+                    RWServiceMouse rwServiceMouse = RWServiceMouse.getInstance();
+                    System.out.println("The id of the object you want to get: ");
+                    id = Integer.valueOf(scanner.nextLine());
+                    Optional<Mouse> retrivedMouse = rwServiceMouse.getMouseById(id);
+                    System.out.println("The mouse from db is:");
+                    System.out.println(retrivedMouse);
+                    logService.createNewLog("Retrieved a mouse from db");
+                    break;
+                case 10:
+                    RWServiceMotherboard rwServiceMotherboard = RWServiceMotherboard.getInstance();
+                    System.out.println("The id of the object you want to get: ");
+                    id = Integer.valueOf(scanner.nextLine());
+                    Optional<Motherboard> retrivedMobo = rwServiceMotherboard.getMotherboardById(id);
+                    System.out.println("The motherboard from db is:");
+                    System.out.println(retrivedMobo);
+                    logService.createNewLog("Retrieved a motherboard from db");
+                    break;
+                case 11:
+                    RWServiceProcessor rwServiceProcessor = RWServiceProcessor.getInstance();
+                    System.out.println("The id of the object you want to get: ");
+                    id = Integer.valueOf(scanner.nextLine());
+                    Optional<Processor> retrivedProc = rwServiceProcessor.getProcessorById(id);
+                    System.out.println("The processor from db is:");
+                    System.out.println(retrivedProc);
+                    logService.createNewLog("Retrieved a processor from db");
                     break;
 
             }

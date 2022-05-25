@@ -13,9 +13,10 @@ import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Set;
+import java.util.Optional;
 
 public class RWServiceKeyboard extends RWServiceGeneric<Keyboard> {
     private static final RWServiceKeyboard instance = new RWServiceKeyboard();
@@ -50,6 +51,38 @@ public class RWServiceKeyboard extends RWServiceGeneric<Keyboard> {
 
             statement.executeUpdate();
         } catch(SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Optional<Keyboard> getKeyboardById(int id) {
+        String sql = "select * from keyboards va where va.id = ?";
+        try(PreparedStatement statement = DbConnection.getInstance().prepareStatement(sql)) {
+            statement.setLong(1, id);
+            ResultSet result = statement.executeQuery();
+            while(result.next()) {
+                Integer keyboardId = result.getInt(1);
+                String layout = result.getString(2);
+                Boolean isMechanichal = result.getBoolean(3);
+                String connesctionInterface = result.getString(4);
+                String modelName = result.getString(5);
+                String manufacturer = result.getString(6);
+                Integer internalId = result.getInt(7);
+
+                return Optional.of(new Keyboard(keyboardId, modelName, manufacturer, connesctionInterface, layout, isMechanichal));
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+        return Optional.empty();
+    }
+
+    public void deleteByDBId(int id){
+        String sql = "delete from keyboards where id = ?";
+        try(PreparedStatement statement = DbConnection.getInstance().prepareStatement(sql)) {
+            statement.setLong(1, id);
+            statement.executeUpdate();
+        }catch(SQLException e) {
             e.printStackTrace();
         }
     }

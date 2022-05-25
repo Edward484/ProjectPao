@@ -11,8 +11,10 @@ import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class RWServiceMotherboard extends RWServiceGeneric<Motherboard> {
     private static final RWServiceMotherboard instance = new RWServiceMotherboard();
@@ -40,6 +42,41 @@ public class RWServiceMotherboard extends RWServiceGeneric<Motherboard> {
 
             statement.executeUpdate();
         } catch(SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Optional<Motherboard> getMotherboardById(int id) {
+        String sql = "select * from motherboards va where va.id = ?";
+        try(PreparedStatement statement = DbConnection.getInstance().prepareStatement(sql)) {
+            statement.setInt(1, id);
+            ResultSet result = statement.executeQuery();
+            while(result.next()) {
+                Integer motherboardId = result.getInt(1);
+                String modelName = result.getString(2);
+                String manufacturer = result.getString(3);
+                Integer powerDrown = result.getInt(4);
+                String socket = result.getString(5);
+                String memoryType = result.getString(6);
+                String format = result.getString(7);
+                Integer numberOfSata = result.getInt(8);
+                String chipsetName = result.getString(9);
+                Integer internalId = result.getInt(10);
+
+                return Optional.of(new Motherboard(motherboardId, modelName, manufacturer, powerDrown, socket, memoryType,format,numberOfSata,chipsetName));
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+        return Optional.empty();
+    }
+
+    public void deleteByDBId(int id){
+        String sql = "delete from motherboards where id = ?";
+        try(PreparedStatement statement = DbConnection.getInstance().prepareStatement(sql)) {
+            statement.setLong(1, id);
+            statement.executeUpdate();
+        }catch(SQLException e) {
             e.printStackTrace();
         }
     }
